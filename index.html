@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minect</title>
     <link rel="icon" href="https://cdn.discordapp.com/attachments/940554471291899905/1270369632926044270/paws.png?ex=66b3736a&is=66b221ea&hm=bc0c8533ec1d0e7f56631513a312edf8d4f52fb392300b591efceb29246567ca&" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         body {
             background: linear-gradient(135deg, #00ff00, #00e5ff); /* Яркий лаймовый и циановый тона */
@@ -111,7 +110,8 @@
             cursor: pointer;
         }
 
-        .button i {
+        .button img {
+            height: 1.5em;
             margin-right: 10px;
         }
 
@@ -168,32 +168,38 @@
         <div class="content">
             <div class="button-container" id="buttons">
                 <div class="button" onclick="copyDiscordID()">
-                    <i class="fab fa-discord"></i>Discord
+                    <img src="https://support.discord.com/hc/theming_assets/01HZPN9XKNQHW3155R21Q4PSDA" alt="Discord">
+                    Discord
                     <span class="tooltip">Скопировать Discord ID</span>
                 </div>
                 <a href="https://steamcommunity.com/id/minect/" class="button">
-                    <i class="fab fa-steam"></i>Steam
+                    <img src="https://store.steampowered.com/favicon.ico" alt="Steam">
+                    Steam
                     <span class="tooltip">Перейти к Steam профилю</span>
                 </a>
                 <a href="https://github.com/Minect86" class="button">
-                    <i class="fab fa-github"></i>GitHub
+                    <img src="https://github.com/fluidicon.png" alt="GitHub">
+                    GitHub
                     <span class="tooltip">Перейти к GitHub профилю</span>
                 </a>
                 <a href="https://boosty.to/minect" class="button">
-                    <i class="fas fa-donate"></i>Boosty
+                    <img src="https://static.boosty.to/static/favicon.png?v=11" alt="Boosty">
+                    Boosty
                     <span class="tooltip">Поддержать на Boosty</span>
                 </a>
                 <a href="https://donationalerts.com/r/minect" class="button">
-                    <i class="fas fa-hand-holding-usd"></i>Donation Alerts
+                    <img src="https://www.donationalerts.com/static/donations/dist/favicon.ico" alt="Donation Alerts">
+                    Donation Alerts
                     <span class="tooltip">Поддержать на Donation Alerts</span>
                 </a>
                 <a href="https://store.epicgames.com/ru/u/2432eac1bfb8441288b266082800cc2a" class="button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" alt="Epic Games" style="height: 1em; margin-right: 10px;">
+                    <img src="https://static-assets-prod.epicgames.com/epic-store/static/webpack/../favicon.ico" alt="Epic Games"">
                     Epic Games
                     <span class="tooltip">Перейти к Epic Games профилю</span>
                 </a>
                 <a href="https://open.spotify.com/user/317gzq66xdmkhoucvglweplkvlay" class="button">
-                    <i class="fab fa-spotify"></i>Spotify
+                    <img src="https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png" alt="Spotify">
+                    Spotify
                     <span class="tooltip">Перейти к Spotify профилю</span>
                 </a>
             </div>
