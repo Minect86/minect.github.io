@@ -168,11 +168,11 @@
     <div class="container">
         <div class="content">
             <div class="button-container" id="buttons">
-                <div class="button" onclick="copyDiscordID()">
+                <a href="https://discord.gg/3h8q5Jeh2N" class="button">
                     <img src="https://support.discord.com/hc/theming_assets/01HZPN9XKNQHW3155R21Q4PSDA" alt="Discord">
-                    Discord
-                    <span class="tooltip">Скопировать Discord ID</span>
-                </div>
+                    Steam
+                    <span class="tooltip">Перейти к Discord серверу</span>
+                </a>
                 <a href="https://steamcommunity.com/id/minect/" class="button">
                     <img src="https://store.steampowered.com/favicon.ico" alt="Steam">
                     Steam
@@ -207,15 +207,6 @@
         </div>
     </div>
     <script>
-        function copyDiscordID() {
-            const discordID = 'minect86';
-            navigator.clipboard.writeText(discordID).then(() => {
-                alert('Discord ID скопирован: ' + discordID);
-            }, () => {
-                alert('Ошибка при копировании Discord ID');
-            });
-        }
-
         document.addEventListener('mousemove', (e) => {
             const x = (window.innerWidth - e.clientX) / 360;
             const y = (window.innerHeight - e.clientY) / 360;
