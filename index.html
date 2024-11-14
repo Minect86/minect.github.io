@@ -3,215 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minect</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/940554471291899905/1270369632926044270/paws.png?ex=66b3736a&is=66b221ea&hm=bc0c8533ec1d0e7f56631513a312edf8d4f52fb392300b591efceb29246567ca&" type="image/png">
+    <title>Fake Payment Portal</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #00ff00, #00e5ff); /* Яркий лаймовый и циановый тона */
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        /* Общие стили */
+        * {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .header {
-            background-color: #3b3b3b; /* Темно-зеленый цвет */
-            width: 100%;
-            text-align: center;
-            padding: 20px 0;
+            padding: 0;
             box-sizing: border-box;
-            position: fixed;
-            top: 0;
-            z-index: 1;
+            font-family: Arial, sans-serif;
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            overflow: hidden;
+            color: #e0e0e0;
         }
-
-        .header h1 {
-            color: #00ff00; /* Яркий лаймовый цвет */
-            font-size: 3em;
-            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-            margin: 0 10px;
-            transition: transform 0.3s;
-        }
-
-        .header h1:hover {
-            transform: scale(1.1); /* Увеличение заголовка при наведении */
-        }
-
-        .header img {
-            height: 3em; /* Ограничение высоты иконки по высоте заголовка */
-            width: auto;
-            margin-right: 10px;
-            border-radius: 50%; /* Округление иконки */
-            transition: transform 0.3s; /* Переход для анимации */
-        }
-
-        .header img:hover {
-            transform: scale(1.2); /* Анимация расширения при наведении */
-        }
-
-        .neon-strip {
+        
+        /* Анимация заднего фона */
+        .background {
+            position: absolute;
             width: 100%;
-            height: 5px;
-            background: #00ffff; /* Яркий лаймовый цвет */
-            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            position: fixed;
-            top: 95px;
-            z-index: 1;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .background .circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            animation: float 10s infinite ease-in-out;
+        }
+        .circle:nth-child(1) { width: 200px; height: 200px; top: 20%; left: 10%; }
+        .circle:nth-child(2) { width: 150px; height: 150px; top: 30%; right: 15%; }
+        .circle:nth-child(3) { width: 300px; height: 300px; top: 60%; left: 25%; }
+        .circle:nth-child(4) { width: 100px; height: 100px; top: 70%; right: 30%; }
+        .circle:nth-child(5) { width: 250px; height: 250px; top: 40%; left: 70%; }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(20px); }
+            100% { transform: translateY(0) translateX(0); }
         }
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            margin-top: 120px;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1;
-            width: 100%;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .button {
-            position: relative;
-            background-color: #3d3d3d; /* Циановый цвет */
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            font-size: 1em;
-            margin: 10px 0;
+        /* Основной контейнер */
+        .payment-container {
+            width: 320px;
+            padding: 25px;
             border-radius: 8px;
-            transition: background-color 0.3s, transform 0.3s;
-            width: 200px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .button img {
-            height: 1.5em;
-            margin-right: 10px;
-        }
-
-        .button:hover {
-            background-color: #00bcd4; /* Более темный циановый цвет при наведении */
-            transform: scale(1.05);
-        }
-
-        .button:active {
-            background-color: #0097a7; /* Еще темнее циановый цвет при нажатии */
-        }
-
-        .tooltip {
-            visibility: hidden;
-            width: 140px;
-            background-color: #555;
-            color: #fff;
             text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
             z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -70px;
-            opacity: 0;
-            transition: opacity 0.3s;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #ffffff;
+        }
+        p {
+            color: #b0b0b0;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .payment-container input[type="number"] {
+            width: 80%;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 1px solid #333;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .payment-container button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #bb86fc;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .payment-container button:hover {
+            background-color: #a45ed1;
         }
 
-        .tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
+        /* Логотипы */
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
         }
-
-        .button:hover .tooltip {
-            visibility: visible;
+        .logos img {
+            width: 40px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .logos img:hover {
             opacity: 1;
+        }
+
+        /* Футер */
+        .footer {
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: #bb86fc;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="https://cdn.discordapp.com/attachments/940554471291899905/1270368217222615040/base.png?ex=66b37219&is=66b22099&hm=cb54383eeb30981e4b29d5cf762ed95c6bf01b2fa0fb32c8bdd4d1b939dac654&" alt="Icon">
-        <h1>Minect</h1>
+    <!-- Анимированный фон -->
+    <div class="background">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
-    <div class="neon-strip"></div>
-    <div class="container">
-        <div class="content">
-            <div class="button-container" id="buttons">
-                <a href="https://discord.gg/3h8q5Jeh2N" class="button">
-                    <img src="https://support.discord.com/hc/theming_assets/01HZPN9XKNQHW3155R21Q4PSDA" alt="Discord">
-                    Discord
-                    <span class="tooltip">Перейти к Discord серверу</span>
-                </a>
-                <a href="https://steamcommunity.com/id/minect/" class="button">
-                    <img src="https://store.steampowered.com/favicon.ico" alt="Steam">
-                    Steam
-                    <span class="tooltip">Перейти к Steam профилю</span>
-                </a>
-                <a href="https://github.com/Minect86" class="button">
-                    <img src="https://github.com/fluidicon.png" alt="GitHub">
-                    GitHub
-                    <span class="tooltip">Перейти к GitHub профилю</span>
-                </a>
-                <a href="https://boosty.to/minect" class="button">
-                    <img src="https://static.boosty.to/static/favicon.png?v=11" alt="Boosty">
-                    Boosty
-                    <span class="tooltip">Поддержать на Boosty</span>
-                </a>
-                <a href="https://donationalerts.com/r/minect" class="button">
-                    <img src="https://www.donationalerts.com/static/donations/dist/favicon.ico" alt="Donation Alerts">
-                    Donation Alerts
-                    <span class="tooltip">Поддержать на Donation Alerts</span>
-                </a>
-                <a href="https://store.epicgames.com/ru/u/2432eac1bfb8441288b266082800cc2a" class="button">
-                    <img src="https://static-assets-prod.epicgames.com/epic-store/static/webpack/../favicon.ico" alt="Epic Games"">
-                    Epic Games
-                    <span class="tooltip">Перейти к Epic Games профилю</span>
-                </a>
-                <a href="https://open.spotify.com/user/317gzq66xdmkhoucvglweplkvlay" class="button">
-                    <img src="https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png" alt="Spotify">
-                    Spotify
-                    <span class="tooltip">Перейти к Spotify профилю</span>
-                </a>
-            </div>
+
+    <!-- Контейнер с формой оплаты -->
+    <div class="payment-container">
+        <h2>Платежный портал</h2>
+        <p>Введите сумму для оплаты:</p>
+        <input type="number" placeholder="Сумма" min="1" required>
+        <button onclick="redirectToRickroll()">Оплатить</button>
+
+        <!-- Логотипы банков и платежных систем -->
+        <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Mir-logo.SVG.svg/220px-Mir-logo.SVG.svg.png" alt="МИР" title="МИР">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/200px-Mastercard_2019_logo.svg.png" alt="MasterCard" title="MasterCard">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UnionPay_logo.svg/200px-UnionPay_logo.svg.png" alt="UnionPay" title="UnionPay">
+        </div>
+
+        <!-- Футер с фейковыми ссылками -->
+        <div class="footer">
+            <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a> | <a href="#">Поддержка</a></p>
+            <p>© 2024 Fake Payment Portal. Все права защищены.</p>
         </div>
     </div>
+
+    <!-- JavaScript для перенаправления -->
     <script>
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth - e.clientX) / 360;
-            const y = (window.innerHeight - e.clientY) / 360;
-            document.getElementById('buttons').style.transform = `translate(${x}px, ${y}px)`;
-        });
+        function redirectToRickroll() {
+            window.location.href = "https://upload.wikimedia.org/wikipedia/ru/thumb/6/61/Rickrolling.gif/200px-Rickrolling.gif";
+        }
     </script>
 </body>
 </html>
